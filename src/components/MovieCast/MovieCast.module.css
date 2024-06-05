@@ -1,0 +1,12 @@
+.mainList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+}
+.wrapperText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

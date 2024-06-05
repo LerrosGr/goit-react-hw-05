@@ -27,7 +27,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  margin-left: 100px;
 }
 
 h1 {
@@ -53,7 +53,16 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+ol {
+  padding-left: 0;
+}
+p {
+  margin: 0;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

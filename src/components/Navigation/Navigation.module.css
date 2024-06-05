@@ -1,0 +1,28 @@
+.navList {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 40px;
+}
+.mainNav {
+  background-color: white;
+  border-radius: 10px;
+  position: relative;
+  top: 10px;
+
+  margin-bottom: 50px;
+  width: 300px;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-size: large;
+}
+.link:hover {
+  text-decoration: underline;
+  color: black;
+}
+.active {
+  color: orange;
+}
