@@ -56,7 +56,7 @@ export default function MovieDetailsPage() {
 
       {movie && (
         <div className={css.wrapper}>
-          <div>
+          <div className={css.infoContainer}>
             <h2 className={css.mainTitle}>{movie.title}</h2>
             <h3 className={css.titleItem}>Overview:</h3>
             <p className={css.text}>{movie.overview}</p>
@@ -73,7 +73,7 @@ export default function MovieDetailsPage() {
 
           <ul className={css.list}>
             <li className={css.titleItem}>
-              Vote-average: {movie.vote_average}/10
+              Vote-average: {movie.vote_average.toFixed(1)}/10
             </li>
             <li className={[css.titleItemGenres]}>Genres:</li>
             <li className={css.genres}>
