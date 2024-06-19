@@ -3,53 +3,73 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: baseline;
   row-gap: 25px;
   column-gap: 15px;
   width: 100%;
   height: auto;
   margin: 0 auto;
 }
+
 .poster {
-  height: 250px;
+  height: auto;
   object-fit: contain;
   border-radius: 20px;
   transition: transform 0.5s ease;
   width: 100%;
-  position: relative;
 }
+
 .poster:hover {
   transform: scale(1.1);
 }
+
 .listItem {
   display: flex;
   flex-direction: column;
+
   margin-bottom: 15px;
   justify-content: center;
   align-items: center;
   text-align: center;
   flex: 0 0 14%;
   gap: 15px;
+  position: relative;
 }
+
 .title {
   font-size: larger;
   color: white;
 }
+
 .title:hover {
   color: orangered;
 }
+
+.wrapperImg {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
 .rating {
   position: absolute;
-  bottom: -20px;
-  padding: 5px 10px;
-  transform: translateY(-50%);
-  background-color: black;
-  color: white;
-  border-radius: 5px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   opacity: 0;
-  pointer-events: none;
-}
-.poster:hover .rating {
-  opacity: 1;
-  bottom: 40px;
+  color: black;
+  background-color: rgba(255, 254, 254, 0.988);
+  font-size: 30px;
+  padding: 0;
+  border-radius: 20px;
   transform: translateY(100%);
+  transition: opacity 1s ease, transform 0.5s ease;
+  z-index: 1;
+}
+
+.listItem:hover .rating {
+  opacity: 1;
+  transform: translateY(0);
 }

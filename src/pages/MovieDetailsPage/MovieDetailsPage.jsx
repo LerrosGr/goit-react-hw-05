@@ -5,11 +5,16 @@ import {
   useLocation,
   Link,
 } from 'react-router-dom';
-
+import clsx from 'clsx';
 import { useEffect, useState, useRef, Suspense } from 'react';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import { getMovieById } from '../../movie-api';
+
 import css from './MovieDetailsPage.module.css';
+
+const getLinkClass = ({ isActive }) => {
+  return clsx(css.link, isActive && css.active);
+};
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -51,7 +56,13 @@ export default function MovieDetailsPage() {
 
       {movie && (
         <div className={css.wrapper}>
+          <div>
+            <h2 className={css.mainTitle}>{movie.title}</h2>
+            <h3 className={css.titleItem}>Overview:</h3>
+            <p className={css.text}>{movie.overview}</p>
+          </div>
           <img
+            className={css.image}
             src={
               movie.poster_path
                 ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
@@ -59,15 +70,12 @@ export default function MovieDetailsPage() {
             }
             alt="Poster"
           />
-          <ul className={css.list}>
-            <li className={css.titleItem}>{movie.title}</li>
-            <li className={css.titleItem}>Overview:</li>
-            <li>{movie.overview}</li>
-            <li className={css.titleItem}>
-              Vote-average: {movie.vote_average}
-            </li>
 
-            <li className={css.titleItem}>Genres:</li>
+          <ul className={css.list}>
+            <li className={css.titleItem}>
+              Vote-average: {movie.vote_average}/10
+            </li>
+            <li className={[css.titleItemGenres]}>Genres:</li>
             <li className={css.genres}>
               {movie.genres.map(genre => (
                 <p key={genre.id}>{genre.name}</p>
@@ -79,12 +87,12 @@ export default function MovieDetailsPage() {
       {!isLoading && !isError && (
         <ul className={css.navDetails}>
           <li>
-            <NavLink className={css.detailLink} to="cast">
+            <NavLink className={getLinkClass} to="cast">
               Cast
             </NavLink>
           </li>
           <li>
-            <NavLink className={css.detailLink} to="reviews">
+            <NavLink className={getLinkClass} to="reviews">
               Reviews
             </NavLink>
           </li>

@@ -32,7 +32,7 @@ export default function MovieReviews() {
   }, [movieId]);
 
   return (
-    <div>
+    <div className={css.mainWrapper}>
       {isError && <ErrorMessage />}
       {isLoading && <p>Loading...</p>}
       {!isLoading && !isError && reviews.length === 0 && (

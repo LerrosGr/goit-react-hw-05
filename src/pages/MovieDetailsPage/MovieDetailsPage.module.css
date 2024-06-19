@@ -1,9 +1,10 @@
 .wrapper {
   display: flex;
   align-items: center;
-  gap: 20px;
-
+  align-items: flex-start;
+  gap: 30px;
   margin-top: 30px;
+  padding: 0 50px 0 50px;
 }
 
 .list {
@@ -23,14 +24,22 @@
 }
 .navDetails {
   display: flex;
-  gap: 50px;
+  gap: 80px;
   font-size: large;
+  justify-content: center;
 }
-.detailLink {
-  color: wheat;
+.link {
+  display: inline-block;
+  color: white;
+  transition: transform 0.3s ease-in-out;
 }
-.detailLink:hover {
-  color: orange;
+
+.link:hover {
+  color: orangered;
+  transform: scale(1.2);
+}
+.active {
+  color: orangered;
 }
 .linkBack {
   display: inline-block;
@@ -43,6 +52,25 @@
   background-color: black;
   color: white;
 }
+.linkBack {
+  text-decoration: underline;
+}
+
 .linkBack:hover {
   color: orange;
+}
+.image {
+  border-radius: 20px;
+}
+.text {
+  width: 500px;
+}
+.mainTitle {
+  color: orangered;
+  font-size: 40px;
+}
+.titleItemGenres {
+  margin-top: 280px;
+  font-size: larger;
+  font-weight: bold;
 }

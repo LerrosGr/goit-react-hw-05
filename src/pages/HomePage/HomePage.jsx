@@ -29,6 +29,7 @@ export default function HomePage() {
   }, []);
   return (
     <div className={css.container}>
+      <h1 className={css.title}>TRENDING MOVIES</h1>
       {isError && <ErrorMessage />}
       {isLoading && <p>Loading...</p>}
       {movies.length > 0 && <MovieList movies={movies} />}

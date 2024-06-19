@@ -1,3 +1,6 @@
+.mainWrapper {
+  padding: 0 40px 0 40px;
+}
 .image {
   width: 80px;
   height: 80px;
@@ -11,4 +14,9 @@
 }
 .textWrapper {
   max-width: 1000px;
+}
+.textNone {
+  display: flex;
+  justify-content: center;
+  font-size: large;
 }

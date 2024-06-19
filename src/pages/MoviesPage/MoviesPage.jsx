@@ -51,24 +51,25 @@ export default function MoviesPage() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className={css.container}>
+      <form className={css.form} onSubmit={handleSubmit}>
         <input
           className={css.input}
           type="text"
           name="title"
           value={query}
           onChange={handleChange}
+          placeholder="Find your movie..."
         />
         <button className={css.button} type="submit">
           Search
         </button>
       </form>
       {isError && <ErrorMessage />}
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p className={css.load}>Loading...</p>}
       {movies.length > 0 && <MovieList movies={movies} />}
       {movies.length === 0 && hasSearched && !isLoading && (
-        <p>No movies found.</p>
+        <p className={css.error}>No movies found.</p>
       )}
     </div>
   );
