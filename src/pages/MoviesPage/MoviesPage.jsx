@@ -3,6 +3,7 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import { getMoviesByQuery } from '../../movie-api';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 import css from './MoviePage.module.css';
 
@@ -46,7 +47,15 @@ export default function MoviesPage() {
 
   const handleSubmit = async evt => {
     evt.preventDefault();
+    if (query === '') {
+      toast.error('Please fill in the field', {
+        duration: 2000,
+        position: 'top-left',
+      });
+      return;
+    }
     setSearchParams({ title: query });
+    setMovies([]);
     handleSearch(query);
   };
 
@@ -65,6 +74,7 @@ export default function MoviesPage() {
           Search
         </button>
       </form>
+      <Toaster />
       {isError && <ErrorMessage />}
       {isLoading && <p className={css.load}>Loading...</p>}
       {movies.length > 0 && <MovieList movies={movies} />}

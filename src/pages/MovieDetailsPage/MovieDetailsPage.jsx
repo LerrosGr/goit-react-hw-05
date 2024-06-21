@@ -24,6 +24,7 @@ export default function MovieDetailsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState('');
+  const [isTrailerAvailable, setIsTrailerAvailable] = useState(true);
 
   const location = useLocation();
 
@@ -53,10 +54,14 @@ export default function MovieDetailsPage() {
         setIsError(false);
         const videoData = await getVideoById(movieId);
         const trailer = videoData.results.find(
-          video => video.type === 'Trailer'
+          video => video.type === 'Trailer' || 'Teaser'
         );
+        console.log(videoData);
         if (trailer) {
           setTrailerUrl(`https://www.youtube.com/watch?v=${trailer.key}`);
+          setIsTrailerAvailable(true);
+        } else {
+          setIsTrailerAvailable(false);
         }
       } catch (error) {
         console.error('Error fetching trailer:', error);
@@ -86,7 +91,7 @@ export default function MovieDetailsPage() {
 
           <a
             className={css.linkTrailer}
-            href={trailerUrl}
+            href={isTrailerAvailable ? trailerUrl : undefined}
             rel="noreferrer"
             target="_blank"
           >
@@ -100,10 +105,17 @@ export default function MovieDetailsPage() {
                 }
                 alt="Poster"
               />
+
               <div className={css.playIconWrapper}>
-                <div className={css.playIcon}>
-                  <FaPlay />
-                </div>
+                {isTrailerAvailable ? (
+                  <div className={css.playIcon}>
+                    <FaPlay />
+                  </div>
+                ) : (
+                  <div className={css.noTrailerText}>
+                    <p>Trailer not found</p>
+                  </div>
+                )}
               </div>
             </div>
           </a>

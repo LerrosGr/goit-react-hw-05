@@ -104,3 +104,12 @@
   font-size: 64px;
   color: orangered;
 }
+.noTrailerText {
+  opacity: 0;
+  font-size: 30px;
+  font-weight: bold;
+  color: orangered;
+}
+.wrapperTrailer:hover .noTrailerText {
+  opacity: 1;
+}
