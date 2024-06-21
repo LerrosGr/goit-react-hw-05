@@ -43,3 +43,8 @@ export const getReviewsById = async movieId => {
   const response = await axios.get(`/movie/${movieId}/reviews`, options);
   return response.data.results;
 };
+
+export const getVideoById = async movieId => {
+  const response = await axios.get(`/movie/${movieId}/videos`, options);
+  return response.data;
+};

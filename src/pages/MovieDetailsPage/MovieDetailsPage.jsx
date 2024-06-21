@@ -6,9 +6,10 @@ import {
   Link,
 } from 'react-router-dom';
 import clsx from 'clsx';
+import { FaPlay } from 'react-icons/fa';
 import { useEffect, useState, useRef, Suspense } from 'react';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import { getMovieById } from '../../movie-api';
+import { getMovieById, getVideoById } from '../../movie-api';
 
 import css from './MovieDetailsPage.module.css';
 
@@ -22,6 +23,7 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [trailerUrl, setTrailerUrl] = useState('');
 
   const location = useLocation();
 
@@ -32,9 +34,7 @@ export default function MovieDetailsPage() {
       try {
         setIsLoading(true);
         setIsError(false);
-
         const data = await getMovieById(movieId);
-
         setMovie(data);
       } catch (error) {
         console.error('Error fetching movie:', error);
@@ -44,6 +44,28 @@ export default function MovieDetailsPage() {
       }
     }
     fetchMovie();
+  }, [movieId]);
+
+  useEffect(() => {
+    async function fetchTrailer() {
+      try {
+        setIsLoading(true);
+        setIsError(false);
+        const videoData = await getVideoById(movieId);
+        const trailer = videoData.results.find(
+          video => video.type === 'Trailer'
+        );
+        if (trailer) {
+          setTrailerUrl(`https://www.youtube.com/watch?v=${trailer.key}`);
+        }
+      } catch (error) {
+        console.error('Error fetching trailer:', error);
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchTrailer();
   }, [movieId]);
 
   return (
@@ -61,15 +83,30 @@ export default function MovieDetailsPage() {
             <h3 className={css.titleItem}>Overview:</h3>
             <p className={css.text}>{movie.overview}</p>
           </div>
-          <img
-            className={css.image}
-            src={
-              movie.poster_path
-                ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-                : `http://www.suryalaya.org/images/no_image.jpg`
-            }
-            alt="Poster"
-          />
+
+          <a
+            className={css.linkTrailer}
+            href={trailerUrl}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <div className={css.wrapperTrailer}>
+              <img
+                className={css.image}
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                    : `http://www.suryalaya.org/images/no_image.jpg`
+                }
+                alt="Poster"
+              />
+              <div className={css.playIconWrapper}>
+                <div className={css.playIcon}>
+                  <FaPlay />
+                </div>
+              </div>
+            </div>
+          </a>
 
           <ul className={css.list}>
             <li className={css.titleItem}>
